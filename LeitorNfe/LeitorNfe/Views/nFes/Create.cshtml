@@ -1,0 +1,111 @@
+﻿<h1>Cadastro</h1>
+<div class="">
+    <div class="container">
+        <div class="row">
+            <section>
+                <form method="post" enctype="multipart/form-data" asp-controller="nFes" asp-action="ReadFile">
+                    <div class="form-control">
+                        <p>Carregar arquivo XML: <input type="file" name="arq" accept=".xml"/></p>
+                        <input type="submit" value="Carregar Dados" />
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+    @if (ViewBag.numbernFe != null)
+    {
+        <div>
+            <section class="form-text">
+                <div class="nFe">
+                    <h2 class="title">Nota Fiscal</h2>
+                    <p>Numero da Nota: <span>@ViewBag.numberNfe </span> </p>
+                    <p>Chave de acesso: <span>@ViewBag.acessKey </span> </p>
+                    <p>Data de Emissão: <span>@ViewBag.dateEmission </span> </p>
+                </div>
+                <div class="person-container">
+                    <div class="person">
+                        <h3>Emitente</h3>
+                        <p>Nome: <span>@ViewBag.name </span> </p>
+                        <p>CNPJ/CPF: <span>@ViewBag.cnpj </span> </p>
+                        <p>Logradouro: <span>@ViewBag.lgr </span> </p>
+                        <p>Numero: <span>@ViewBag.number </span> </p>
+                        <p>Bairro: <span>@ViewBag.hood </span> </p>
+                        <p>Cidade: <span>@ViewBag.city </span> </p>
+                        <p>UF: <span>@ViewBag.uf </span> </p>
+                        <p>CEP: <span>@ViewBag.cep </span> </p>
+                    </div>
+                    <div class="person">
+                        <h3>Destinatário</h3>
+                        <p>Nome: <span>@ViewBag.nameD </span> </p>
+                        <p>E-mail: <span>@ViewBag.emailD </span> </p>
+                        <p>CNPJ/CPF: <span>@ViewBag.cnpjD </span> </p>
+                        <p>Logradouro: <span>@ViewBag.lgrD </span> </p>
+                        <p>Numero: <span>@ViewBag.numberD </span> </p>
+                        <p>Bairro: <span>@ViewBag.hoodD </span> </p>
+                        <p>Cidade: <span>@ViewBag.cityD </span> </p>
+                        <p>UF: <span>@ViewBag.ufD </span> </p>
+                        <p>CEP: <span>@ViewBag.cepD </span> </p>
+                    </div>
+                </div>
+
+                @if (ViewBag.listOfLists != null)
+                {
+                    <h3 class="prod-align">Produtos</h3>
+                    <div class="products-container">
+                    @foreach (var lista in ViewBag.listOfLists)
+                    {
+                        <ul>
+                            @for (var prod = 0; prod < lista.Count; prod++)
+                            {
+                                @if (prod == 0)
+                                {
+                                    <li>
+                                        Numero do Item: <span>@lista[prod]</span>
+                                    </li>
+                                }
+                                @if (prod == 1)
+                                {
+                                    <li>
+                                        Código do Produto: <span>@lista[prod]</span>
+                                    </li>
+                                }
+                                @if (prod == 2)
+                                {
+                                    <li>
+                                        Nome: <span>@lista[prod]</span>
+                                    </li>
+                                }
+                                @if (prod == 3)
+                                {
+                                    <li>
+                                        Quantidade Comprada: <span>@lista[prod]</span>
+                                    </li>
+                                }
+                                @if (prod == 4)
+                                {
+                                    <li>
+                                        Valor Unitário: <span>@lista[prod]</span>
+                                    </li>
+                                }
+                                @if (prod == 5)
+                                {
+                                    <li>
+                                        Valor Total do Produto: <span>@lista[prod]</span>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    }
+                    </div>
+                }
+            <h4>Total da Nota: @ViewBag.total</h4>
+            </section>
+        </div>
+        <div class="info">
+            <label for="description">Descrição</label>
+            <textarea id="description" name="description" maxlength="255" cols="80" class="desc"></textarea>
+            <label for="numberofOrder">Numero do Pedido</label>
+            <input type="number" id="numberOfOrder" name="numberOfOrder" pattern="[0-9]*" class="number" maxlength="9" required />
+        </div>
+    }
+</div>
